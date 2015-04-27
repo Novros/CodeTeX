@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Main {
 
-    private static Logger logger = Logger.getLogger("InputFile");
+    private static Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String [] args) {
 
