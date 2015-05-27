@@ -1,7 +1,9 @@
 package cz.novros.tex.semestral_work;
 
+import cz.novros.tex.semestral_work.automat.Automat;
 import cz.novros.tex.semestral_work.file.InputFile;
 import cz.novros.tex.semestral_work.file.OutputFile;
+import cz.novros.tex.semestral_work.processing.RemoveProcessor;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -21,19 +23,10 @@ public class Main {
         }
         logger.info("Application started with arguments: " + arguments);
 
-        try {
-            OutputFile outputFile = new OutputFile("TestFile.txt");
-            outputFile.writeLine("Ahoj.");
-            outputFile.writeLine("Právě zapisuji do souboru v klidu.");
+        Automat automat = new Automat("test.tex");
+        automat.addProcessor(new RemoveProcessor());
+        automat.run();
 
-            InputFile inputFile = new InputFile("TestFile.txt");
-            System.out.println(inputFile.readLine());
-            System.out.println(inputFile.readLine());
-
-        } catch (IOException e) {
-            logger.error("Something went wrong. " + e);
-            e.printStackTrace();
-        }
-
+        logger.info("Application completed his job.");
     }
 }
