@@ -1,0 +1,67 @@
+\input opmac
+
+%%%%%%%% Zde začíná "oblast definic" pro tento dokument %%%%%%%%%%%
+
+\newcount\itemnum                % deklarace počítadla odrážek
+\def\White{\pdfliteral{1 g}}     % bíla barva pomocí PDF low level příkazu
+\def\Black{\pdfliteral{0 g}}     % černá barva
+\def\Red{\pdfliteral{1 0 0 rg}}  % červená
+
+\chyph             % inicializace českého dělení slov v csplainu
+\magnification\magstep1    % celý dokument bude 1,2 krát větší
+\input chelvet             % použité písmo: helvetica i v matematice
+\font\titulfont=\fontname\tenbf\space scaled \magstep1  % větší font
+\newdimen\indskip \indskip=15pt % výčty budou odsazeny 15pt
+\def\ctverecek#1{\noindent      % čtvereček proměnné velikosti
+   \hbox to\indskip{\vrule height#1pt depth0pt width#1pt\hss}}
+\def\bod{\par\hangindent=\indskip \advance\itemnum by1 
+   \indent \lower2pt\rlap{\Red\ctverecek{12}}%
+   \hbox to12pt{\hss\White\the\itemnum\Black\hss}\kern3pt}  % definice zkratky \bod
+\def\nadpis#1\par{          % definice nadpisu:
+   \removelastskip\bigskip  %   odmaže poslední vert.mezeru a přidá vlastní
+   \Red\ctverecek{7}{\titulfont #1\Black} % nadpis odsazený čtverečkem
+   \par\nobreak}            %   konec řádku, zakázaný zlom, žádná mezera
+\parskip=\medskipamount     % mezi odstavci bude mezera jako \medskip
+\parindent=0pt              % odstavce nebudou odsazeny zarážkou
+\let\itemskip=\relax        % žádné další mezery mezi výčty
+
+%%%%%%%% Zde začíná "vlastní text" dokumentu %%%%%%%%%%%%%%%%%%%%%%%%
+
+\nadpis Můj první dokument
+
+Zkouším napsat první text v~\TeX u. Tento odstavec musí být
+tak dlouhý, aby bylo vidět, že se rozlomil aspoň na dva řádky.
+
+Jednotlivé odstavce oddělujeme od sebe prázdným řádkem. Prázdnými řádky
+vůbec nešetříme, protože zvyšují přehlednost zdrojového textu.
+Vyzkoušíme si nyní několik věcí.
+
+\begtt
+public class InputFile {    Logger logger = Logger.getLogger("InputFile");    final static Charset ENCODING = StandardCharsets.UTF_8;    private String fileName = "";    private Path path;    private BufferedReader reader = null;    private boolean end = false;    public InputFile(String fileName) throws IOException {        logger.debug("Openning file in constructor...");        this.fileName = fileName;        this.path = Paths.get(this.fileName);        reader = Files.newBufferedReader(path, ENCODING);    }    /**     * Read one line from file.     *     * @return String filled with one line.     */    public String readLine() {        logger.debug("Reading line. End=" + end);        String line = null;        try {            if (!end) {                line = reader.readLine();            }        } catch (IOException e) {            logger.error("Could not read line. " + e);            e.printStackTrace();        }        if(line == null) {            end = true;        }        return line;    }}\endtt
+\itemskip
+\bod Budeme používat české \uv{uvozovky}, které se liší od ``anglických''.
+     Uvědomíme si, že použití "těchto znaků" je úplně špatně!
+\bod Je rozdíl mezi spojovníkem (je-li), pomlčkou ve větě~--
+     a dlouhou pomlčkou---ta se používá v~anglických dokumentech.
+\bod Předpokládáme, že každý dokáže rozeznat 1 (jedničku) od l
+     (písmene el) a 0 (nulu) od O (písmene~O).
+\bod Zkusíme přepnout do {\bf polotučného písma}, nebo do
+     {\it kurzívy}. Také vyzkoušíme {\tt strojopis}.
+\bod Všimneme si, že ve slovech grafika, firma, apod. se písmena
+     f a i automaticky proměnila v~jediný znak fi (srovnáme to
+     s~nesprávným f\/i).
+\bod Mezery mezi písmeny jsou automaticky vyrovnávány podle tvaru písmen.
+     Ve slově \uv{Tento} je například písmeno~e těsněji přisazeno
+     k~písmenu~T, aby se mezery mezi písmeny opticky jevily stejnoměrné.
+\bod Vypravíme se na malou exkurzi do matematiky: $a^2 + b^2 = c^2$.
+     Zjistíme, že číslo -1 je zde napsáno špatně (prokletý spojovník),
+     zatímco správně má být~$-1$.
+\bod Protože \% uvozuje komentář a \$ přepíná do matematické sazby,
+     musíme před ně napsat zpětné lomítko, chceme-li je dostat do dokumentu.
+\itemskip
+
+\nadpis Závěr
+
+To by pro začátek stačilo. Příkazem {\tt\char`\\bye} ukončíme své pokusy.
+\bye
+

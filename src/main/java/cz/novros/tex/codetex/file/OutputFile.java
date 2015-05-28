@@ -1,5 +1,4 @@
-package cz.novros.tex.semestral_work.file;
-
+package cz.novros.tex.codetex.file;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -14,7 +13,6 @@ package cz.novros.tex.semestral_work.file;
  * http://www.gnu.org/copyleft/gpl.html
  **/
 
-
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -26,11 +24,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Created by rostislav on 26.4.15.
+ * Output class for writing to file.
+ *
+ * @author Rostislav Novak <rostislav.novak92@gmail.com>
+ * @version 1.0
+ * @since 2015-04-26
  */
-public class OutputFile {
-    Logger logger = Logger.getLogger("InputFile");
-    final static Charset ENCODING = StandardCharsets.UTF_8;
+public class OutputFile implements IOutput {
+
+    private Logger logger = Logger.getLogger("InputFile");
+    private final static Charset ENCODING = StandardCharsets.UTF_8;
 
     private String fileName = "";
     private Path path;
@@ -43,11 +46,16 @@ public class OutputFile {
         writer = Files.newBufferedWriter(path, ENCODING);
     }
 
-    public void writeLine(String line) {
-        logger.debug("Writing line: " + line);
+    /**
+     * Write text to output with new line.
+     *
+     * @param text Text, which will be printed.
+     */
+    public void writeLine(String text) {
+        logger.debug("Writing line: " + text);
 
         try {
-            writer.write(line);
+            writer.write(text);
             writer.newLine();
             writer.flush();
         } catch (IOException e) {
@@ -56,6 +64,11 @@ public class OutputFile {
         }
     }
 
+    /**
+     * Write text to output.
+     *
+     * @param text Text, which will be printed.
+     */
     public void write(String text) {
         logger.debug("Writing: " + text);
 

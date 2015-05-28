@@ -1,4 +1,4 @@
-package cz.novros.tex.semestral_work.processing;
+package cz.novros.tex.codetex.processing;
 
 /**
  * Created by rostislav on 27.5.15.

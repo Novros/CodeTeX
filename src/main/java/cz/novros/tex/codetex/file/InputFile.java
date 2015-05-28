@@ -1,4 +1,4 @@
-package cz.novros.tex.semestral_work.file;
+package cz.novros.tex.codetex.file;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or

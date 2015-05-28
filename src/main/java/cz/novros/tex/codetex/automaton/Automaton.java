@@ -1,4 +1,4 @@
-package cz.novros.tex.semestral_work.automat;
+package cz.novros.tex.codetex.automaton;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -13,9 +13,9 @@ package cz.novros.tex.semestral_work.automat;
  * http://www.gnu.org/copyleft/gpl.html
  **/
 
-import cz.novros.tex.semestral_work.file.InputFile;
-import cz.novros.tex.semestral_work.file.OutputFile;
-import cz.novros.tex.semestral_work.processing.IProcessor;
+import cz.novros.tex.codetex.file.IOutput;
+import cz.novros.tex.codetex.file.InputFile;
+import cz.novros.tex.codetex.processing.IProcessor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,24 +28,18 @@ import java.util.List;
  * @version 1.0
  * @since 2015-05-27
  */
-public class Automat {
-    public final static String CODE_BLOCK_START = "\\begtt";
-    public final static String CODE_BLOCK_END = "\\endtt";
-    public final static String FILE_ADDITION_NAME = "Processed";
-
+public class Automaton {
     private InputFile input;
-    private OutputFile output;
+    private IOutput output;
 
     private List<IProcessor> processors = new ArrayList<>();
 
     private IAutomatState state;
 
-    public Automat(String fileName) {
+    public Automaton(String fileName) {
         state = new AutomatStateOnlyRead();
         try {
             input = new InputFile(fileName);
-            String newFileName = fileName.substring(0,fileName.lastIndexOf(".")) + "_" + FILE_ADDITION_NAME + ".tex";
-            output = new OutputFile(newFileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +50,7 @@ public class Automat {
         while (!input.isEnd()) {
             line = input.readLine();
             line = state.handle(this,line);
-            output.writeLine(line);
+            output.write(line);
         }
     }
 
@@ -78,5 +72,9 @@ public class Automat {
 
     public void setState(IAutomatState state) {
         this.state = state;
+    }
+
+    public void setOutput(IOutput output) {
+        this.output = output;
     }
 }
