@@ -16,6 +16,8 @@ package cz.novros.tex.codetex.automaton;
 import cz.novros.tex.codetex.file.IOutput;
 import cz.novros.tex.codetex.file.InputFile;
 import cz.novros.tex.codetex.processing.IProcessor;
+import cz.novros.tex.codetex.processing.KeywordProcessor;
+import cz.novros.tex.codetex.settings.Settings;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,10 +45,13 @@ public class Automaton {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        processors.add(new KeywordProcessor());
     }
 
     public void run() {
         String line;
+        output.writeLine(Settings.getBeginText());
         while (!input.isEnd()) {
             line = input.readLine();
             line = state.handle(this,line);

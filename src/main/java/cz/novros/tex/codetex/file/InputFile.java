@@ -52,7 +52,6 @@ public class InputFile {
      * @return String filled with one line.
      */
     public String readLine() {
-        logger.debug("Reading line. End=" + end);
         String line = null;
 
         try {

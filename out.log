@@ -1,0 +1,140 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdfcsplain 2015.5.27)  29 MAY 2015 00:28
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+ encTeX v. Jun. 2004, reencoding enabled
+**out.text
+(./out.text The format: csplain <Nov. 2013>.
+The cs-fonts are preloaded and A4 size implicitly defined.
+The utf8->iso8859-2 re-encoding of Czech+Slovak alphabet activated by encTeX
+(/usr/share/texlive/texmf-dist/tex/csplain/opmac/opmac.tex
+This is OPmac (Olsak's Plain macros), version <Nov. 2013>
+\tmpnum=\count27
+\tmpdim=\dimen16
+\iindent=\dimen17
+\ttindent=\dimen18
+\colsep=\dimen19
+\mnoteindent=\dimen20
+\mnotesize=\dimen21
+\ptunit=\dimen22
+\fontdim=\dimen23
+(/usr/share/texlive/texmf-dist/tex/csplain/fonts/ams-math.tex
+FONT: AMS math fonts - \mathchardef's prepared, 12 math families preloaded.
+\ptmunit=\dimen24
+)
+The \^, \`, \', \v, \" and \r expands to characters by ISO-8859-2.
+\reffile=\write0
+\testin=\read0
+\chapnum=\count28
+\secnum=\count29
+\seccnum=\count30
+\nonumnum=\count31
+\remskipamount=\skip18
+\tnum=\count32
+\fnum=\count33
+\dnum=\count34
+\itemnum=\count35
+\lastpage=\count36
+\destheight=\dimen25
+\oulnum=\count37
+\ttline=\count38
+\viline=\count39
+\vifile=\read1
+\tabdata=\toks12
+\colnum=\count40
+\picwidth=\dimen26
+\picheight=\dimen27
+\fnotenum=\count41
+\fnotenumlocal=\count42
+\mnotenum=\count43
+\mnoteskip=\dimen28
+\auxfile=\write1
+\bibnum=\count44
+\lastcitenum=\count45
+\pgwidth=\dimen29
+\pgheight=\dimen30
+\shiftoffset=\dimen31
+)
+(/usr/share/texlive/texmf-dist/tex/csplain/opmac/opmac.tex)
+\itemnum=\count46
+
+cs hyphenation used (\language=5). \frenchspacing is set on.
+(/usr/share/texlive/texmf-dist/tex/csplain/fonts/chelvet.tex
+FONT: Helvetica - \rm, \it, \bf, \bi, \tt, \cond\rm, ..., \cond\bi, \narrow.
+(/usr/share/texlive/texmf-dist/tex/csplain/fonts/chars-8z.tex)
+(/usr/share/texlive/texmf-dist/tex/csplain/fonts/tx-math.tex
+FONT: TX math fonts - \mathchardef's prepared, 14 math families preloaded.))
+\indskip=\dimen32
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.42 ...c Charset ENCODING = StandardCharsets.UTF_
+                                                  8;
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.43 
+     
+? 
+
+Overfull \hbox (12.90671pt too wide) in paragraph at lines 49--55
+\tenbf file in con-struc-tor..."); this.fileName = fi-le-Name; this.path = Path
+s.get(this.fileName);|
+
+\hbox(7.34+2.18999)x377.47319, glue set - 1.0
+.\tenbf ^^L (ligature fi)
+.\tenbf l
+.\tenbf e
+.\glue 2.78 plus 1.99998 minus 1.0
+.\tenbf i
+.\tenbf n
+.\glue 2.78 plus 1.99998 minus 1.0
+.\tenbf c
+.\tenbf o
+.\tenbf n
+.\discretionary
+..\tenbf -
+.\tenbf s
+.\tenbf t
+.\tenbf r
+.\tenbf u
+.\tenbf c
+.\discretionary
+..\tenbf -
+.\tenbf t
+.\kern-0.1
+.\tenbf o
+.\tenbf r
+.\kern-0.57
+.\tenbf .
+.\tenbf .
+.\tenbf .
+.\kern-0.32
+.\tenbf "
+.\tenbf )
+.\tenbf ;
+.\glue 2.78 plus 1.99998 minus 1.0
+.etc.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] ){/usr/share/texlive/tex
+mf-dist/fonts/enc/dvips/cs/xt2.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvi
+ps/cs/xl2.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/
+share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
+/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on out.pdf (1 page, 51231 bytes).
+PDF statistics:
+ 39 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,4 +1,5 @@
 \input opmac
+\input opmac
 
 %%%%%%%% Zde začíná "oblast definic" pro tento dokument %%%%%%%%%%%
 
@@ -36,49 +37,47 @@ Jednotlivé odstavce oddělujeme od sebe prázdným řádkem. Prázdnými řádk
 vůbec nešetříme, protože zvyšují přehlednost zdrojového textu.
 Vyzkoušíme si nyní několik věcí.
 
-\begtt
+\bf public \bf class InputFile {
+    Logger logger = Logger.getLogger("InputFile");
+    \bf final \bf static Charset ENCODING = StandardCharsets.UTF_8;
 
+    \bf private String fileName = "";
+    \bf private Path path;
+    \bf private BufferedReader reader = null;
+    \bf private \bf boolean end = false;
 
+    \bf public InputFile(String fileName) \bf \bf throws IOException {
+        logger.debug("Openning file in \bf constructor...");
+        \bf this.fileName = fileName;
+        \bf this.path = Paths.get(this.fileName);
+        reader = Files.\bf newBufferedReader(path, ENCODING);
+    }
 
+    /**
+     * Read one line from file.
+     *
+     * @\bf return String filled with one line.
+     */
+    \bf public String readLine() {
+        logger.debug("Reading line. End=" + end);
+        String line = null;
 
+        \bf try {
+            \bf if (!end) {
+                line = reader.readLine();
+            }
+        } \bf catch (IOException e) {
+            logger.error("Could not read line. " + e);
+            e.pr\bf intStackTrace();
+        }
 
+        \bf if(line == null) {
+            end = true;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\endtt
+        \bf return line;
+    }
+}
 
 \itemskip
 \bod Budeme používat české \uv{uvozovky}, které se liší od ``anglických''.
