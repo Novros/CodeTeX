@@ -40,7 +40,7 @@ public class InputFile {
     private boolean end = false;
 
     public InputFile(String fileName) throws IOException {
-        logger.debug("Openning file in constructor...");
+        logger.debug("Openning file " + fileName);
         this.fileName = fileName;
         this.path = Paths.get(this.fileName);
         reader = Files.newBufferedReader(path, ENCODING);
@@ -69,6 +69,25 @@ public class InputFile {
         }
 
         return line;
+    }
+
+    public String readFile() {
+        String file = "";
+        String line = "";
+        try {
+            while (!end) {
+                line = reader.readLine();
+                if(line == null) {
+                    end = true;
+                    break;
+                }
+                file += line + "\n";
+            }
+        } catch (IOException e) {
+            logger.error("Could not read line. " + e);
+            e.printStackTrace();
+        }
+        return file;
     }
 
     public boolean isEnd() {

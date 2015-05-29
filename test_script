@@ -1,0 +1,10 @@
+#!/bin/bash
+# Script for testing fresh build CodeTex
+
+echo "Testing CodeTex.."
+mvn clean package assembly:single
+cd target
+java -jar CodeTex-jar-with-dependencies.jar -o ../temp.tex ../test.tex
+cd ..
+pdfcsplain temp.tex
+echo "Testing CodeTex complete!"

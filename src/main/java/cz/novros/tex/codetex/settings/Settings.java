@@ -19,10 +19,14 @@ public class Settings {
 
     private static String configFile = SETTINGS_DIR + "settings.properties";
     private static String texMacrosFile = SETTINGS_DIR + "tex_macros.properties";
+    private static String codetexMacrosFile = SETTINGS_DIR + "codetex_macros";
 
+    private static String codetexMacros;
     private static String codeBlockStart;
     private static String codeBlockEnd;
     private static String beginText;
+    private static int spaceSize;
+    private static int tabularSpaceCount;
     private static Map<String,String> texMacros = new HashMap<>();
 
     public static void loadSettings() throws IOException {
@@ -34,6 +38,8 @@ public class Settings {
         codeBlockStart = properties.getProperty("verbatim.start");
         codeBlockEnd = properties.getProperty("verbatim.end");
         beginText = properties.getProperty("begin_text");
+        spaceSize = Integer.parseInt(properties.getProperty("space.size"));
+        tabularSpaceCount = Integer.parseInt(properties.getProperty("space.tabular"));
 
         InputFile texMacrosInput = new InputFile(texMacrosFile);
         String line;
@@ -43,6 +49,9 @@ public class Settings {
                 texMacros.put(line.split("=")[0], line.split("=")[1]);
             }
         }
+
+        texMacrosInput = new InputFile(codetexMacrosFile);
+        codetexMacros = texMacrosInput.readFile();
     }
 
     public static String getCodeBlockStart() {
@@ -59,5 +68,17 @@ public class Settings {
 
     public static String getMacro(String macro) {
         return texMacros.get(macro);
+    }
+
+    public static int getTabularSpaceCount() {
+        return tabularSpaceCount;
+    }
+
+    public static int getSpaceSize() {
+        return spaceSize;
+    }
+
+    public static String getCodetexMacros() {
+        return codetexMacros;
     }
 }
