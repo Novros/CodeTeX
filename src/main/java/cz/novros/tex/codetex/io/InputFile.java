@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.file;
+package cz.novros.tex.codetex.io;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Class for reading file.
+ * Class for reading io.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0
@@ -47,7 +47,7 @@ public class InputFile {
     }
 
     /**
-     * Read one line from file.
+     * Read one line from io.
      *
      * @return String filled with one line.
      */

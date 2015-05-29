@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.file;
+package cz.novros.tex.codetex.io;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Output class for writing to file.
+ * Output class for writing to io.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0

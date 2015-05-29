@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.processing;
+package cz.novros.tex.codetex.processors;
 
 import cz.novros.tex.codetex.settings.LanguageSettings;
 

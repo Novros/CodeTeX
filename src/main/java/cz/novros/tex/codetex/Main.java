@@ -14,8 +14,8 @@ package cz.novros.tex.codetex;
  **/
 
 import cz.novros.tex.codetex.automaton.Automaton;
-import cz.novros.tex.codetex.file.OutputFile;
-import cz.novros.tex.codetex.file.OutputSystem;
+import cz.novros.tex.codetex.io.OutputFile;
+import cz.novros.tex.codetex.io.OutputSystem;
 import cz.novros.tex.codetex.settings.Settings;
 import org.apache.log4j.Logger;
 

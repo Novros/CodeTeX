@@ -13,9 +13,11 @@ package cz.novros.tex.codetex.automaton;
  * http://www.gnu.org/copyleft/gpl.html
  **/
 
-import cz.novros.tex.codetex.file.IOutput;
-import cz.novros.tex.codetex.file.InputFile;
-import cz.novros.tex.codetex.processing.*;
+import cz.novros.tex.codetex.automaton.state.AutomatonStateOnlyRead;
+import cz.novros.tex.codetex.automaton.state.IAutomatonState;
+import cz.novros.tex.codetex.io.IOutput;
+import cz.novros.tex.codetex.io.InputFile;
+import cz.novros.tex.codetex.processors.*;
 import cz.novros.tex.codetex.settings.Settings;
 
 import java.io.IOException;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for file processing.
+ * Automaton of this program.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0
@@ -35,20 +37,22 @@ public class Automaton {
 
     private List<IProcessor> processors = new ArrayList<>();
 
-    private IAutomatState state;
+    private IAutomatonState state;
 
     public Automaton(String fileName) {
-        state = new AutomatStateOnlyRead();
+        state = new AutomatonStateOnlyRead();
         try {
             input = new InputFile(fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        processors.add(new VerbatimProcessor());
-        processors.add(new TabularProcessor());
+        processors.add(new EscapingProcessor());
+        processors.add(new IndentProcessor());
         processors.add(new CommentProcessor());
-        //processors.add(new KeywordProcessor());
+        processors.add(new ClassProcessor());
+        processors.add(new KeywordProcessor());
+        processors.add(new StringProcessor());
     }
 
     public void run() {
@@ -76,11 +80,11 @@ public class Automaton {
         return processors;
     }
 
-    public IAutomatState getState() {
+    public IAutomatonState getState() {
         return state;
     }
 
-    public void setState(IAutomatState state) {
+    public void setState(IAutomatonState state) {
         this.state = state;
     }
 

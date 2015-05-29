@@ -1,17 +1,10 @@
-Project
--------
+* Projít soubory a upravit.
+* Okomentovat soubory.
 * Uklidit složku.
+* Uložit správně testovací soubor.
 * Rozhodit soubory tak kam patří.
-
-Zdrojáky
---------
-* Napsat testy ke komponentám jestli fungují jak mají.
-* Okomentovat zdrojáky.
-* Upravit trochu kód, "Ať to nějak vypadá.".
-
-TeX makra
----------
-* Napsat vlastní makra pro verbatim text, aby se dalo případně bez tohoto programu text zkompilovat.
-* Napsat vlastní makro pro označení programovacího jazyka, aby se případně při kompilaci nevypsalo.
-* Vymyslet vlastní makra pro obarvení textu a různých efektů.
-* Vymyslet makra pro jednotlivé typy zvýraznění.
+* Napsat defaultní makra
+* Napsat do README, že to používá OPmac, pokud jej taky používá, ať to dá jako prnví věc v dokumentu v oblasti deklarace pro COdeTEx
+* Domyslet jak verbatim, jestli to tam vůbec dávat jako možnost pro použítí bez tohoto programu, protože když to někdo bude chtít použít, tak tam stejně některé věci musí doplnit.
+* Přidat na začátek oblasti \codetexNewline
+                            \typosize[8/0]

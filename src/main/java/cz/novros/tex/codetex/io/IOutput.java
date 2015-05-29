@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.file;
+package cz.novros.tex.codetex.io;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or

@@ -1,6 +1,19 @@
 package cz.novros.tex.codetex.settings;
 
-import cz.novros.tex.codetex.file.InputFile;
+/**
+ * LICENSE This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * http://www.gnu.org/copyleft/gpl.html
+ **/
+
+import cz.novros.tex.codetex.io.InputFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +21,11 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * Created by rostislav on 28.5.15.
+ * Class which hold language settings for editting state.
+ *
+ * @author Rostislav Novak <rostislav.novak92@gmail.com>
+ * @version 1.0
+ * @since 2015-05-28
  */
 public class LanguageSettings {
 
@@ -18,9 +35,10 @@ public class LanguageSettings {
     private String commentEnd;
     private String string;
     private String classMethodRegex;
-    private String classMethodDeclarationRegex;
+    private String classDeclarationRegex;
     private String callingRegex;
     private List<String> delimetrs = new ArrayList<>();
+    private String[] stringDeclarations;
 
     private Map<String,String> macroMappings = new HashMap<>();
 
@@ -36,12 +54,16 @@ public class LanguageSettings {
         commentEnd = properties.getProperty("comment.end");
         string = properties.getProperty("string");
         classMethodRegex = properties.getProperty("class.method");
-        classMethodDeclarationRegex = properties.getProperty("class.declaration");
+        classDeclarationRegex = properties.getProperty("class.declaration");
         callingRegex = properties.getProperty("class.calling");
+
         String temp = properties.getProperty("delimetrs");
         for(int i = 0; i < temp.length(); i++) {
             delimetrs.add(String.valueOf(temp.charAt(i)));
         }
+        delimetrs.add(" ");
+
+        stringDeclarations = properties.getProperty("string").split(",");
 
         InputFile texMacrosInput = new InputFile(Settings.LANGUAGE_SETTINGS_DIR + language + "_highlighting.properties");
         String line;
@@ -77,8 +99,8 @@ public class LanguageSettings {
         return classMethodRegex;
     }
 
-    public String getClassMethodDeclarationRegex() {
-        return classMethodDeclarationRegex;
+    public String getClassDeclarationRegex() {
+        return classDeclarationRegex;
     }
 
     public String getCallingRegex() {
@@ -87,5 +109,13 @@ public class LanguageSettings {
 
     public String getMapping(String key) {
         return macroMappings.get(key);
+    }
+
+    public List<String> getDelimetrs() {
+        return delimetrs;
+    }
+
+    public String[] getStringDeclarations() {
+        return stringDeclarations;
     }
 }

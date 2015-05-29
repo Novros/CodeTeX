@@ -1,6 +1,19 @@
 package cz.novros.tex.codetex.settings;
 
-import cz.novros.tex.codetex.file.InputFile;
+/**
+ * LICENSE This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * http://www.gnu.org/copyleft/gpl.html
+ **/
+
+import cz.novros.tex.codetex.io.InputFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +24,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by rostislav on 28.5.15.
+ * Class which hold application settings for processors.
+ *
+ * @author Rostislav Novak <rostislav.novak92@gmail.com>
+ * @version 1.0
+ * @since 2015-05-28
  */
 public class Settings {
     public static String SETTINGS_DIR = ".." + File.separator + "settings" + File.separator;
