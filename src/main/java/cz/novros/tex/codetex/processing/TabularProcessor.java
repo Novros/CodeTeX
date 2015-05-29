@@ -14,6 +14,7 @@ public class TabularProcessor implements IProcessor {
 
     @Override
     public String processLine(String line, LanguageSettings language) {
+        line = line.trim();
         line = addSpaces(line);
         return line;
     }

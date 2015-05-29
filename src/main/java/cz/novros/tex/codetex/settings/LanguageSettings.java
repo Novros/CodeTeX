@@ -20,6 +20,7 @@ public class LanguageSettings {
     private String classMethodRegex;
     private String classMethodDeclarationRegex;
     private String callingRegex;
+    private List<String> delimetrs = new ArrayList<>();
 
     private Map<String,String> macroMappings = new HashMap<>();
 
@@ -37,6 +38,10 @@ public class LanguageSettings {
         classMethodRegex = properties.getProperty("class.method");
         classMethodDeclarationRegex = properties.getProperty("class.declaration");
         callingRegex = properties.getProperty("class.calling");
+        String temp = properties.getProperty("delimetrs");
+        for(int i = 0; i < temp.length(); i++) {
+            delimetrs.add(String.valueOf(temp.charAt(i)));
+        }
 
         InputFile texMacrosInput = new InputFile(Settings.LANGUAGE_SETTINGS_DIR + language + "_highlighting.properties");
         String line;
