@@ -30,15 +30,21 @@ import java.util.*;
 public class LanguageSettings {
 
     private String[] keywords;
+
+    private String blockStart;
+    private String blockEnd;
+
     private String commentLine;
     private String commentBegin;
     private String commentEnd;
-    private String string;
+
+    private List<String> stringDeclarations = new ArrayList<>();
+
     private String classMethodRegex;
     private String classDeclarationRegex;
     private String callingRegex;
+
     private List<String> delimetrs = new ArrayList<>();
-    private String[] stringDeclarations;
 
     private Map<String,String> macroMappings = new HashMap<>();
 
@@ -52,10 +58,11 @@ public class LanguageSettings {
         commentLine = properties.getProperty("comment.line");
         commentBegin = properties.getProperty("comment.begin");
         commentEnd = properties.getProperty("comment.end");
-        string = properties.getProperty("string");
         classMethodRegex = properties.getProperty("class.method");
         classDeclarationRegex = properties.getProperty("class.declaration");
         callingRegex = properties.getProperty("class.calling");
+        blockStart = properties.getProperty("block.start");
+        blockEnd = properties.getProperty("block.end");
 
         String temp = properties.getProperty("delimetrs");
         for(int i = 0; i < temp.length(); i++) {
@@ -63,7 +70,9 @@ public class LanguageSettings {
         }
         delimetrs.add(" ");
 
-        stringDeclarations = properties.getProperty("string").split(",");
+        for(String s : properties.getProperty("string").split(",")) {
+            stringDeclarations.add(s);
+        }
 
         InputFile texMacrosInput = new InputFile(Settings.LANGUAGE_SETTINGS_DIR + language + "_highlighting.properties");
         String line;
@@ -91,10 +100,6 @@ public class LanguageSettings {
         return commentEnd;
     }
 
-    public String getString() {
-        return string;
-    }
-
     public String getClassMethodRegex() {
         return classMethodRegex;
     }
@@ -115,7 +120,15 @@ public class LanguageSettings {
         return delimetrs;
     }
 
-    public String[] getStringDeclarations() {
+    public List<String> getStringDeclarations() {
         return stringDeclarations;
+    }
+
+    public String getBlockStart() {
+        return blockStart;
+    }
+
+    public String getBlockEnd() {
+        return blockEnd;
     }
 }

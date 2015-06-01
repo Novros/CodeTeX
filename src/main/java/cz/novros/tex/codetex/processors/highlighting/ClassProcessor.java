@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.processors;
+package cz.novros.tex.codetex.processors.highlighting;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -13,6 +13,7 @@ package cz.novros.tex.codetex.processors;
  * http://www.gnu.org/copyleft/gpl.html
  **/
 
+import cz.novros.tex.codetex.processors.IProcessor;
 import cz.novros.tex.codetex.settings.LanguageSettings;
 
 /**

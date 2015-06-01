@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.processors;
+package cz.novros.tex.codetex.processors.indent;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -13,6 +13,7 @@ package cz.novros.tex.codetex.processors;
  * http://www.gnu.org/copyleft/gpl.html
  **/
 
+import cz.novros.tex.codetex.processors.IProcessor;
 import cz.novros.tex.codetex.settings.LanguageSettings;
 import cz.novros.tex.codetex.settings.Settings;
 
@@ -31,22 +32,24 @@ public class IndentProcessor implements IProcessor {
 
     @Override
     public String processLine(String line, LanguageSettings language) {
-        line = line.trim();
         line = addSpaces(line);
+        setNestedBracketsNumber(line, language);
         return line;
     }
 
 
     private String addSpaces(String line) {
         String spaces = "\\codetexSpace{" + nestedBrackets*Settings.getTabularSpaceCount() + "} ";
-
-        if(line.contains("{")) {
-            nestedBrackets++;
-        }
-        if (line.contains("}")) {
-            nestedBrackets--;
-        }
-
         return spaces + line + NEW_LINE_MACRO;
+    }
+
+    private void setNestedBracketsNumber(String line, LanguageSettings language) {
+        for(int i = 0; i < line.length(); i++) {
+            if(String.valueOf(line.charAt(i)).equals(language.getBlockStart())) {
+                nestedBrackets++;
+            } else if (String.valueOf(line.charAt(i)).equals(language.getBlockEnd())) {
+                nestedBrackets--;
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.processors;
+package cz.novros.tex.codetex.processors.indent;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -14,6 +14,7 @@ package cz.novros.tex.codetex.processors;
  **/
 
 import cz.novros.tex.codetex.other.Pair;
+import cz.novros.tex.codetex.processors.IProcessor;
 import cz.novros.tex.codetex.settings.LanguageSettings;
 
 import java.util.ArrayList;

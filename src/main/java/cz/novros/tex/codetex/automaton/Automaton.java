@@ -18,6 +18,9 @@ import cz.novros.tex.codetex.automaton.state.IAutomatonState;
 import cz.novros.tex.codetex.io.IOutput;
 import cz.novros.tex.codetex.io.InputFile;
 import cz.novros.tex.codetex.processors.*;
+import cz.novros.tex.codetex.processors.highlighting.*;
+import cz.novros.tex.codetex.processors.indent.EscapingProcessor;
+import cz.novros.tex.codetex.processors.indent.IndentProcessor;
 import cz.novros.tex.codetex.settings.Settings;
 
 import java.io.IOException;
@@ -48,11 +51,8 @@ public class Automaton {
         }
 
         processors.add(new EscapingProcessor());
+        processors.add(new HighlightingProcessor());
         processors.add(new IndentProcessor());
-        processors.add(new CommentProcessor());
-        processors.add(new ClassProcessor());
-        processors.add(new KeywordProcessor());
-        processors.add(new StringProcessor());
     }
 
     public void run() {

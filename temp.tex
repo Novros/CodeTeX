@@ -19,6 +19,7 @@
 \def\Red{\pdfliteral{1 0 0 rg}}  % červená
 
 \chyph             % inicializace českého dělení slov v csplainu
+\magnification\magstep1    % celý dokument bude 1,2 krát větší
 \input chelvet             % použité písmo: helvetica i v matematice
 \font\titulfont=\fontname\tenbf\space scaled \magstep1  % větší font
 \newdimen\indskip \indskip=15pt % výčty budou odsazeny 15pt
@@ -46,8 +47,6 @@ Jednotlivé odstavce oddělujeme od sebe prázdným řádkem. Prázdnými řádk
 vůbec nešetříme, protože zvyšují přehlednost zdrojového textu.
 Vyzkoušíme si nyní několik věcí.
 
-\codetexNewline
-\typosize[8/0]
 \codetexSpace{0} \# \$ \% \& $\backslash$ \^ \_ $\{$ $\}$  $<$ $>$ \~\codetexNewline
 \codetexSpace{0} {\bf {\localcolor \Blue public}} {\bf {\localcolor \Blue class}} InputFile $\{$\codetexNewline
 \codetexSpace{4} Logger logger = Logger.getLogger({\localcolor \Yellow "InputFile"});\codetexNewline
@@ -55,8 +54,8 @@ Vyzkoušíme si nyní několik věcí.
 \codetexSpace{4} \codetexNewline
 \codetexSpace{4} {\bf {\localcolor \Blue private}} String fileName = {\localcolor \Yellow ""};\codetexNewline
 \codetexSpace{4} {\bf {\localcolor \Blue private}} Path path;\codetexNewline
-\codetexSpace{4} {\bf {\localcolor \Blue private}} BufferedReader reader = null;\codetexNewline
-\codetexSpace{4} {\bf {\localcolor \Blue private}} {\bf {\localcolor \Blue boolean}} end = false;\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue private}} BufferedReader reader = {\bf {\localcolor \Blue null}};\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue private}} {\bf {\localcolor \Blue boolean}} end = {\bf {\localcolor \Blue false}};\codetexNewline
 \codetexSpace{4} \codetexNewline
 \codetexSpace{4} {\bf {\localcolor \Blue public}} InputFile(String fileName) {\bf {\localcolor \Blue throws}} IOException $\{$\codetexNewline
 \codetexSpace{8} logger.debug({\localcolor \Yellow "Openning file in constructor..."});\codetexNewline
@@ -65,33 +64,32 @@ Vyzkoušíme si nyní několik věcí.
 \codetexSpace{8} reader=Files.newBufferedReader( path, ENCODING );\codetexNewline
 \codetexSpace{8} $\}$\codetexNewline
 \codetexSpace{4} \codetexNewline
-\codetexSpace{4} {\localcolor \Grey /**\codetexNewline}
-{\localcolor \Grey \codetexSpace{4} * Read one line from file.\codetexNewline}
-{\localcolor \Grey \codetexSpace{4} *\codetexNewline}
-{\localcolor \Grey \codetexSpace{4} * @{\bf {\localcolor \Blue return}} String filled with one line.\codetexNewline}
-{\localcolor \Grey \codetexSpace{4} */}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey /**}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Read one line from file.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey *}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * @return String filled with one line.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey */}\codetexNewline
 \codetexSpace{4} {\bf {\localcolor \Blue public}} String readLine() $\{$\codetexNewline
 \codetexSpace{8} logger.debug({\localcolor \Yellow "Reading line. End="} + end);\codetexNewline
-\codetexSpace{8} String line = null;\codetexNewline
+\codetexSpace{8} String line = {\bf {\localcolor \Blue null}};\codetexNewline
 \codetexSpace{8} \codetexNewline
-\codetexSpace{8} {\bf {\localcolor \Blue try}} $\{$ {\localcolor \Grey /* Nějak vnoženy\codetexNewline}
-{\localcolor \Grey \codetexSpace{12} komentar */} Sad\codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue try}} $\{${\localcolor \Grey /* Nějak vnoženy}\codetexNewline
+\codetexSpace{12} {\localcolor \Grey komentar */} Sad\codetexNewline
 \codetexSpace{12} {\bf {\localcolor \Blue if}} (!end) $\{$\codetexNewline
 \codetexSpace{16} line = reader.readLine();\codetexNewline
 \codetexSpace{16} $\}$\codetexNewline
 \codetexSpace{12} $\}$ {\bf {\localcolor \Blue catch}} (IOException e) $\{$\codetexNewline
 \codetexSpace{12} logger.error({\localcolor \Yellow "Could not read line. "} + e);\codetexNewline
-\codetexSpace{12} e.printStackTrace(); {\localcolor \Grey // Line comment test\codetexNewline}
+\codetexSpace{12} e.printStackTrace();{\localcolor \Grey // Line comment test}\codetexNewline
 \codetexSpace{12} $\}$\codetexNewline
 \codetexSpace{8} \codetexNewline
-\codetexSpace{8} if(line == null) $\{$\codetexNewline
-\codetexSpace{12} end = true;\codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue if}}(line == {\bf {\localcolor \Blue null}}) $\{$\codetexNewline
+\codetexSpace{12} end = {\bf {\localcolor \Blue true}};\codetexNewline
 \codetexSpace{12} $\}$\codetexNewline
 \codetexSpace{8} \codetexNewline
 \codetexSpace{8} {\bf {\localcolor \Blue return}} line;\codetexNewline
 \codetexSpace{8} $\}$\codetexNewline
 \codetexSpace{4} $\}$\codetexNewline
-\typosize[12/] \codetexNewline
 
 \itemskip
 \bod Budeme používat české \uv{uvozovky}, které se liší od ``anglických''.
