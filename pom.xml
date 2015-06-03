@@ -22,7 +22,7 @@
     </dependencies>
 
     <build>
-        <finalName>CodeTex</finalName>
+        <finalName>CodeTeX</finalName>
 
         <plugins>
             <!-- Set a compiler level -->
@@ -35,6 +35,44 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+            <!-- Exclude settings from jar file. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>settings/</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!--- Plugin for copying default settings. -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-settings</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/settings</outputDirectory>
+                            <encoding>UTF-8</encoding>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/settings</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Maven Assembly Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -65,6 +103,25 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Plugin for creating script to start application. -->
+            <!-- <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.10</version>
+                <configuration>
+                    <assembleDirectory>${basedir}/build</assembleDirectory>
+                    <repositoryName>/jar</repositoryName>
+                    <binFolder>/bin</binFolder>
+                    <endorsedDir>/</endorsedDir>
+                    <programs>
+                        <program>
+                            <id>CodeTeX</id>
+                            <mainClass>cz.novros.tex.codetex.Main</mainClass>
+                        </program>
+                    </programs>
+                </configuration>
+            </plugin> -->
 
         </plugins>
     </build>

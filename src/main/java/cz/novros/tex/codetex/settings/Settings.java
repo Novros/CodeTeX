@@ -15,10 +15,10 @@ package cz.novros.tex.codetex.settings;
 
 import cz.novros.tex.codetex.io.InputFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -31,7 +31,7 @@ import java.util.Properties;
  * @since 2015-05-28
  */
 public class Settings {
-    public static String SETTINGS_DIR = ".." + File.separator + "settings" + File.separator;
+    public static String SETTINGS_DIR = getJarLocation() + "settings" + File.separator;
     public static String LANGUAGE_SETTINGS_DIR = SETTINGS_DIR + "language_settings" + File.separator;
 
     private static String configFile = SETTINGS_DIR + "settings.properties";
@@ -69,6 +69,21 @@ public class Settings {
 
         texMacrosInput = new InputFile(codetexMacrosFile);
         codetexMacros = texMacrosInput.readFile();
+    }
+
+    private static String getJarLocation() {
+        URL url = Settings.class.getProtectionDomain().getCodeSource().getLocation(); //Gets the path
+        String jarPath = null;
+        try {
+            jarPath = URLDecoder.decode(url.getFile(), "UTF-8"); //Should fix it to be read correctly by the system
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String parentPath = new File(jarPath).getParentFile().getPath(); //Path of the jar
+        parentPath = parentPath + File.separator;
+
+        return parentPath;
     }
 
     public static String getCodeBlockStart() {

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdfcsplain 2015.5.27)  1 JUN 2015 21:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdfcsplain 2015.5.27)  3 JUN 2015 21:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -54,12 +54,10 @@ The \^, \`, \', \v, \" and \r expands to characters by ISO-8859-2.
 \pgwidth=\dimen29
 \pgheight=\dimen30
 \shiftoffset=\dimen31
- (./temp.ref)
-\openout0 = `temp.ref'.
-
 )
 \itemnum=\count46
- cs hyphenation used (\language=5). \frenchspacing is set on.
+
+cs hyphenation used (\language=5). \frenchspacing is set on.
 (/usr/share/texlive/texmf-dist/tex/csplain/fonts/chelvet.tex
 FONT: Helvetica - \rm, \it, \bf, \bi, \tt, \cond\rm, ..., \cond\bi, \narrow.
 (/usr/share/texlive/texmf-dist/tex/csplain/fonts/chars-8z.tex)
