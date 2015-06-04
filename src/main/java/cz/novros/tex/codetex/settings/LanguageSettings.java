@@ -78,7 +78,7 @@ public class LanguageSettings {
             blockStart = properties.getProperty("block.start");
             blockEnd = properties.getProperty("block.end");
 
-            String temp = properties.getProperty("delimetrs");
+            String temp = properties.getProperty("delimiters");
             for (int i = 0; i < temp.length(); i++) {
                 delimiters.add(String.valueOf(temp.charAt(i)));
             }

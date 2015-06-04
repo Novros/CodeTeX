@@ -4,9 +4,3 @@
 	\dimen0 = 4\dimen0
 	\hskip \dimen0 \relax}
 \def\codetexNewline {\par}
-\def\bold #1 {{\bf #1}}
-\def\cyan #1 {{\localcolor \Cyan #1}}
-\def\grey #1 {{\localcolor \Grey #1}}
-\def\yellow #1 {{\localcolor \Yellow #1}}
-\def\red #1 {{\localcolor \Red #1}}
-\def\blue #1 {{\localcolor \Blue #1}}

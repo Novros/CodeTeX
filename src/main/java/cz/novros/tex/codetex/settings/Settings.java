@@ -47,6 +47,7 @@ public class Settings {
     private static String texBlockStart;
     private static String texBlockEnd;
     private static int blockFontSize;
+    private static int blockParSize;
     private static int tabularSpaceCount;
     private static Map<String,String> texMacros = new HashMap<>();
 
@@ -72,6 +73,7 @@ public class Settings {
             texBlockEnd = properties.getProperty("block.end");
             tabularSpaceCount = Integer.parseInt(properties.getProperty("space.tabular"));
             blockFontSize = Integer.parseInt(properties.getProperty("font.size"));
+            blockParSize = Integer.parseInt(properties.getProperty("font.par.size"));
 
             logger.debug("Loading tex_macros.properties file.");
             texMacrosInput = new InputFile(texMacrosFile);
@@ -152,5 +154,9 @@ public class Settings {
 
     public static String getTexBlockEnd() {
         return texBlockEnd;
+    }
+
+    public static int getBlockParSize() {
+        return blockParSize;
     }
 }

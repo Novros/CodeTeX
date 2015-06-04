@@ -116,7 +116,7 @@ public class HighlightingProcessorStateNormal implements IHighlightingProcessorS
      * @return Returns True if char is delimiter, otherwise false.
      */
     private boolean isDelimiter(char text, LanguageSettings language) {
-        return isInCollection(String.valueOf(text),language.getDelimiters());
+        return language.getDelimiters().contains(String.valueOf(text));
     }
 
     /**
@@ -127,24 +127,7 @@ public class HighlightingProcessorStateNormal implements IHighlightingProcessorS
      * @return Returns True if char is string declaration, otherwise false.
      */
     private boolean isString(char text, LanguageSettings language) {
-        return isInCollection(String.valueOf(text),language.getStringDeclarations());
-    }
-
-    /**
-     * Tests if text is in collection.
-     *
-     * @param text Text which will be checked.
-     * @param collection
-     * @return Returns true if
-     */
-    private boolean isInCollection(String text, List<String> collection) {
-        return collection.contains(text);
-        /*for( String compare : collection) {
-            if (String.valueOf(text).equals(compare)) {
-                return true;
-            }
-        }
-        return false;*/
+        return language.getStringDeclarations().contains(String.valueOf(text));
     }
 
     /**
