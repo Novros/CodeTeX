@@ -2,8 +2,8 @@
 This program is for code highlighting and intending in plain TeX. It is console preprocessor for plain TeX. With this
 program you can have simple syntax highlighting in plain TeX. CodeTeX can highlight only comments, keywords,
 strings and indent code. You can set some variables for application and language, which you want to highlight. CodeTeX
-uses OPmac library for default TeX macros (only colors). CodeTeX is written in Java 1.7, so you must have installed
-at least Java 1.7.
+uses OPmac library for default TeX macros (only colors). CodeTeX is written in Java 1.6, so you must have installed
+at least Java 1.6.
 
 Application version: 1.0
 

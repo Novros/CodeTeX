@@ -49,7 +49,7 @@ public class Settings {
     private static int blockFontSize;
     private static int blockParSize;
     private static int tabularSpaceCount;
-    private static Map<String,String> texMacros = new HashMap<>();
+    private static Map<String,String> texMacros = new HashMap<String,String>();
 
     /**
      * Load settings from settings files in settings folder.

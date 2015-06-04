@@ -1,0 +1,194 @@
+\input opmac
+\def\codetexSpace #1 {
+	\dimen0 = #1pt
+	\dimen0 = 4\dimen0
+	\hskip \dimen0 \relax}
+\def\codetexNewline {\par}
+%%%%%%%% Zde začíná "oblast definic" pro tento dokument %%%%%%%%%%%
+
+\newcount\itemnum                % deklarace počítadla odrážek
+\def\White{\pdfliteral{1 g}}     % bíla barva pomocí PDF low level příkazu
+\def\Black{\pdfliteral{0 g}}     % černá barva
+\def\Red{\pdfliteral{1 0 0 rg}}  % červená
+
+\chyph             % inicializace českého dělení slov v csplainu
+\input chelvet             % použité písmo: helvetica i v matematice
+\font\titulfont=\fontname\tenbf\space scaled \magstep1  % větší font
+\newdimen\indskip \indskip=15pt % výčty budou odsazeny 15pt
+\def\ctverecek#1{\noindent      % čtvereček proměnné velikosti
+   \hbox to\indskip{\vrule height#1pt depth0pt width#1pt\hss}}
+\def\bod{\par\hangindent=\indskip \advance\itemnum by1 
+   \indent \lower2pt\rlap{\Red\ctverecek{12}}%
+   \hbox to12pt{\hss\White\the\itemnum\Black\hss}\kern3pt}  % definice zkratky \bod
+\def\nadpis#1\par{          % definice nadpisu:
+   \removelastskip\bigskip  %   odmaže poslední vert.mezeru a přidá vlastní
+   \Red\ctverecek{7}{\titulfont #1\Black} % nadpis odsazený čtverečkem
+   \par\nobreak}            %   konec řádku, zakázaný zlom, žádná mezera
+\parskip=\medskipamount     % mezi odstavci bude mezera jako \medskip
+\parindent=0pt              % odstavce nebudou odsazeny zarážkou
+\let\itemskip=\relax        % žádné další mezery mezi výčty
+
+%%%%%%%% Zde začíná "vlastní text" dokumentu %%%%%%%%%%%%%%%%%%%%%%%%
+
+\nadpis Můj první dokument
+
+Zkouším napsat první text v~\TeX u. Tento odstavec musí být
+tak dlouhý, aby bylo vidět, že se rozlomil aspoň na dva řádky.
+
+Jednotlivé odstavce oddělujeme od sebe prázdným řádkem. Prázdnými řádky
+vůbec nešetříme, protože zvyšují přehlednost zdrojového textu.
+Vyzkoušíme si nyní několik věcí.
+
+\bigbreak
+\codetexNewline \typoscale[800/10]
+\codetexSpace{0} \# \$ \% \& $\backslash$ \^ \_ $\{$ $\}$  $<$ $>$ \~\codetexNewline
+\codetexSpace{0} {\bf {\localcolor \Blue public}} {\bf {\localcolor \Blue class}} InputFile $\{$\codetexNewline
+\codetexSpace{4} Logger logger = Logger.getLogger({\localcolor \Yellow "InputFile"});\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue final}} {\bf {\localcolor \Blue static}} Charset ENCODING = StandardCharsets.UTF\_8;\codetexNewline
+\codetexSpace{4} \codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue private}} String fileName = {\localcolor \Yellow ""};\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue private}} Path path;\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue private}} BufferedReader reader = {\bf {\localcolor \Blue null}};\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue private}} {\bf {\localcolor \Blue boolean}} end = {\bf {\localcolor \Blue false}};\codetexNewline
+\codetexSpace{4} \codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue public}} InputFile(String fileName) {\bf {\localcolor \Blue throws}} IOException $\{$\codetexNewline
+\codetexSpace{8} logger.debug({\localcolor \Yellow "Openning file in constructor..."});\codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue this}}.fileName = fileName;\codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue this}}.path=Paths.get({\bf {\localcolor \Blue this}}.fileName);\codetexNewline
+\codetexSpace{8} reader=Files.newBufferedReader( path, ENCODING );\codetexNewline
+\codetexSpace{8} $\}$\codetexNewline
+\codetexSpace{4} \codetexNewline
+\codetexSpace{4} {\localcolor \Grey /**}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Read one line from file.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey *}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * @return String filled with one line.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey */}\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Blue public}} String readLine() $\{$\codetexNewline
+\codetexSpace{8} logger.debug({\localcolor \Yellow "Reading line. End="} + end);\codetexNewline
+\codetexSpace{8} String line = {\bf {\localcolor \Blue null}};\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue try}} $\{${\localcolor \Grey /* Nějak vnoženy}\codetexNewline
+\codetexSpace{12} {\localcolor \Grey komentar */} Sad\codetexNewline
+\codetexSpace{12} {\bf {\localcolor \Blue if}} (!end) $\{$\codetexNewline
+\codetexSpace{16} line = reader.readLine();\codetexNewline
+\codetexSpace{16} $\}$\codetexNewline
+\codetexSpace{12} $\}$ {\bf {\localcolor \Blue catch}} (IOException e) $\{$\codetexNewline
+\codetexSpace{12} logger.error({\localcolor \Yellow "Could not read line. "} + e);\codetexNewline
+\codetexSpace{12} e.printStackTrace();{\localcolor \Grey // Line comment test}\codetexNewline
+\codetexSpace{12} $\}$\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue if}}(line == {\bf {\localcolor \Blue null}}) $\{$\codetexNewline
+\codetexSpace{12} end = {\bf {\localcolor \Blue true}};\codetexNewline
+\codetexSpace{12} $\}$\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Blue return}} line;\codetexNewline
+\codetexSpace{8} $\}$\codetexNewline
+\codetexSpace{4} $\}$\codetexNewline
+\codetexNewline \typoscale[1250/100000]
+\bigbreak
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida porttitor dolor, vitae elementum turpis maximus at. Proin malesuada lorem ac mollis venenatis. Duis efficitur nisl ipsum. Fusce imperdiet ullamcorper rhoncus. Donec eu interdum lacus, quis fermentum nisi. Duis placerat leo velit. Nulla facilisi. Vestibulum vel feugiat lorem. Donec euismod, sem nec convallis facilisis, nisi felis rhoncus ligula, et rutrum augue eros finibus ligula. Vivamus nec velit congue, maximus lectus ac, venenatis lectus. Maecenas in nunc at velit sodales mollis. Vestibulum sit amet ligula purus. Nullam massa nibh, vestibulum at ultricies ac, fringilla vel libero.
+
+\itemskip
+\bod Budeme používat české \uv{uvozovky}, které se liší od ``anglických''.
+     Uvědomíme si, že použití "těchto znaků" je úplně špatně!
+\bod Je rozdíl mezi spojovníkem (je-li), pomlčkou ve větě~--
+     a dlouhou pomlčkou---ta se používá v~anglických dokumentech.
+\bod Předpokládáme, že každý dokáže rozeznat 1 (jedničku) od l
+     (písmene el) a 0 (nulu) od O (písmene~O).
+\bod Zkusíme přepnout do {\bf polotučného písma}, nebo do
+     {\it kurzívy}. Také vyzkoušíme {\tt strojopis}.
+\bod Všimneme si, že ve slovech grafika, firma, apod. se písmena
+     f a i automaticky proměnila v~jediný znak fi (srovnáme to
+     s~nesprávným f\/i).
+\bod Mezery mezi písmeny jsou automaticky vyrovnávány podle tvaru písmen.
+     Ve slově \uv{Tento} je například písmeno~e těsněji přisazeno
+     k~písmenu~T, aby se mezery mezi písmeny opticky jevily stejnoměrné.
+\bod Vypravíme se na malou exkurzi do matematiky: $a^2 + b^2 = c^2$.
+     Zjistíme, že číslo -1 je zde napsáno špatně (prokletý spojovník),
+     zatímco správně má být~$-1$.
+\bod Protože \% uvozuje komentář a \$ přepíná do matematické sazby,
+     musíme před ně napsat zpětné lomítko, chceme-li je dostat do dokumentu.
+\itemskip
+
+Curabitur quis pulvinar urna. Aenean nec tempus felis. Nunc ullamcorper nunc eget ipsum sodales, vitae mattis urna vulputate. Integer pretium tincidunt mauris in condimentum. Duis vitae elementum diam. Aliquam erat volutpat. Cras volutpat commodo felis, et ultricies purus rutrum a. Nam rutrum consectetur nulla vel tincidunt. Phasellus sit amet elit ac justo pulvinar congue. Nam lacinia, massa quis aliquam volutpat, erat eros placerat est, vel maximus ipsum tortor at sem. Vestibulum pretium, metus sit amet scelerisque imperdiet, libero odio viverra velit, sit amet consectetur lectus ante ac dolor. Maecenas eu euismod ligula. Praesent a tincidunt magna.
+
+\bigbreak
+\codetexNewline \typoscale[800/10]
+\codetexSpace{0} {\bf {\localcolor \Green class}} DefaultController {\bf {\localcolor \Green extends}} Controller\codetexNewline
+\codetexSpace{0} $\{$\codetexNewline
+\codetexSpace{4} \codetexNewline
+\codetexSpace{4} {\localcolor \Grey /**}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * @Route("/twig", name="twigexample")}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * @Template()}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey */}\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Green public}} {\bf {\localcolor \Green function}} twigExampleAction() $\{$\codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Green return}} array(\codetexNewline
+\codetexSpace{8} {\localcolor \Cyan 'page\_title'} =$>$ {\localcolor \Cyan "Twig example page!"},\codetexNewline
+\codetexSpace{8} {\localcolor \Cyan 'user'} =$>$ {\bf {\localcolor \Green new}} User({\localcolor \Cyan "Nikdo"}));\codetexNewline
+\codetexSpace{8} $\}$\codetexNewline
+\codetexSpace{4} \codetexNewline
+\codetexSpace{4} {\localcolor \Grey /**}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Request}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Data z requsetu lze snadno načís pomocí parametru, který není specifikován v url, ale jen jako parametr,}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * který je dodán automaticky.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Lze to i získat v templatu pomocí $\{$$\{$ app.request.query.get('page') $\}$$\}$ nebo $\{$$\{$ app.request.request.get('page') $\}$$\}$.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey *}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * @Route("/requestInfo", name="request")}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey */}\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Green public}} {\bf {\localcolor \Green function}} requestAction(Request \$request)\codetexNewline
+\codetexSpace{4} $\{$\codetexNewline
+\codetexSpace{8} {\localcolor \Grey // is it an Ajax request?}\codetexNewline
+\codetexSpace{8} \$isAjax = \$request-$>$isXmlHttpRequest();\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // what's the preferred language of the user?}\codetexNewline
+\codetexSpace{8} \$language = \$request-$>$getPreferredLanguage(array({\localcolor \Cyan 'en'}, {\localcolor \Cyan 'fr'}));\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // get the value of a \$\_GET parameter}\codetexNewline
+\codetexSpace{8} \$pageName = \$request-$>$query-$>$get({\localcolor \Cyan 'page'});\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // get the value of a \$\_POST parameter}\codetexNewline
+\codetexSpace{8} \$pageName = \$request-$>$request-$>$get({\localcolor \Cyan 'page'});\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey //return new Response("Is ajax? \$isAjax  Language? \$language");}\codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Green return}} \$this-$>$render({\localcolor \Cyan 'default/hello.html.twig'}, array(\codetexNewline
+\codetexSpace{8} {\localcolor \Cyan 'name'} =$>$ \$language\codetexNewline
+\codetexSpace{8} ));\codetexNewline
+\codetexSpace{8} $\}$\codetexNewline
+\codetexSpace{4} \codetexNewline
+\codetexSpace{4} {\localcolor \Grey /**}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Session}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Symfony poskytuje snadnou správu session pomocí requestu.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * Flash zprávu lze zobrazit i rovnou templatu pomocí $\{$$\{$ app.session.flashbag.get('notice') $\}$$\}$.}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey *}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey * @Route("/session", name="session")}\codetexNewline
+\codetexSpace{4} {\localcolor \Grey */}\codetexNewline
+\codetexSpace{4} {\bf {\localcolor \Green public}} {\bf {\localcolor \Green function}} sessionAction(Request \$request)\codetexNewline
+\codetexSpace{4} $\{$\codetexNewline
+\codetexSpace{8} \$session = \$request-$>$getSession();\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // store an attribute for reuse during a later user request}\codetexNewline
+\codetexSpace{8} \$session-$>$set({\localcolor \Cyan 'foo'}, {\localcolor \Cyan 'bar'});\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // get the value of a session attribute}\codetexNewline
+\codetexSpace{8} \$foo = \$session-$>$get({\localcolor \Cyan 'foo'});\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // use a default value if the attribute doesn't exist}\codetexNewline
+\codetexSpace{8} \$foo = \$session-$>$get({\localcolor \Cyan 'foo'}, {\localcolor \Cyan 'default\_value'});\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\localcolor \Grey // store a message for the very next request}\codetexNewline
+\codetexSpace{8} \$this-$>$addFlash({\localcolor \Cyan 'notice'}, {\localcolor \Cyan 'Congratulations, your action succeeded!'});\codetexNewline
+\codetexSpace{8} \codetexNewline
+\codetexSpace{8} {\bf {\localcolor \Green return}} \$this-$>$render({\localcolor \Cyan 'default/hello.html.twig'}, array(\codetexNewline
+\codetexSpace{8} {\localcolor \Cyan 'name'} =$>$ \$foo\codetexNewline
+\codetexSpace{8} ));\codetexNewline
+\codetexSpace{8} $\}$\codetexNewline
+\codetexSpace{4} $\}$\codetexNewline
+\codetexNewline \typoscale[1250/100000]
+\bigbreak
+
+\nadpis Závěr
+
+To by pro začátek stačilo. Příkazem {\tt\char`\\bye} ukončíme své pokusy.
+\bye
+

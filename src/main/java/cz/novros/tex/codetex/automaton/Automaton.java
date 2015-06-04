@@ -41,7 +41,7 @@ public class Automaton {
     private InputFile input;
     private IOutput output;
 
-    private List<IProcessor> processors = new ArrayList<>();
+    private List<IProcessor> processors = new ArrayList<IProcessor>();
 
     private IAutomatonState state;
 

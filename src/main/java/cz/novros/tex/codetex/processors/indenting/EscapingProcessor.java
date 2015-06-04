@@ -29,21 +29,21 @@ import java.util.List;
  */
 public class EscapingProcessor implements IProcessor {
 
-    private List<Pair<String,String>> specialCharactersMapping = new ArrayList<>();
+    private List<Pair<String,String>> specialCharactersMapping = new ArrayList<Pair<String,String>>();
 
     public EscapingProcessor() {
-        specialCharactersMapping.add(new Pair<>("\\", "$\\backslash$"));
-        specialCharactersMapping.add(new Pair<>("$", "\\$"));
-        specialCharactersMapping.add(new Pair<>("#", "\\#"));
-        specialCharactersMapping.add(new Pair<>("%", "\\%"));
-        specialCharactersMapping.add(new Pair<>("&", "\\&"));
-        specialCharactersMapping.add(new Pair<>("^", "\\^"));
-        specialCharactersMapping.add(new Pair<>("_", "\\_"));
-        specialCharactersMapping.add(new Pair<>("{", "$\\{$"));
-        specialCharactersMapping.add(new Pair<>("}", "$\\}$"));
-        specialCharactersMapping.add(new Pair<>("~", "\\~"));
-        specialCharactersMapping.add(new Pair<>("<", "$<$"));
-        specialCharactersMapping.add(new Pair<>(">","$>$"));
+        specialCharactersMapping.add(new Pair<String,String>("\\", "$\\backslash$"));
+        specialCharactersMapping.add(new Pair<String,String>("$", "\\$"));
+        specialCharactersMapping.add(new Pair<String,String>("#", "\\#"));
+        specialCharactersMapping.add(new Pair<String,String>("%", "\\%"));
+        specialCharactersMapping.add(new Pair<String,String>("&", "\\&"));
+        specialCharactersMapping.add(new Pair<String,String>("^", "\\^"));
+        specialCharactersMapping.add(new Pair<String,String>("_", "\\_"));
+        specialCharactersMapping.add(new Pair<String,String>("{", "$\\{$"));
+        specialCharactersMapping.add(new Pair<String,String>("}", "$\\}$"));
+        specialCharactersMapping.add(new Pair<String,String>("~", "\\~"));
+        specialCharactersMapping.add(new Pair<String,String>("<", "$<$"));
+        specialCharactersMapping.add(new Pair<String,String>(">","$>$"));
     }
 
 

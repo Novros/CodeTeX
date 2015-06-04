@@ -41,15 +41,15 @@ public class LanguageSettings {
     private String commentBegin;
     private String commentEnd;
 
-    private List<String> stringDeclarations = new ArrayList<>();
+    private List<String> stringDeclarations = new ArrayList<String>();
 
     private String classMethodRegex;
     private String classDeclarationRegex;
     private String callingRegex;
 
-    private List<String> delimiters = new ArrayList<>();
+    private List<String> delimiters = new ArrayList<String>();
 
-    private Map<String,String> macroMappings = new HashMap<>();
+    private Map<String,String> macroMappings = new HashMap<String,String>();
 
     /**
      * Creates language settings from passed language.
