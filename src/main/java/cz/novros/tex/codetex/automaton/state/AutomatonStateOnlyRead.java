@@ -37,7 +37,7 @@ public class AutomatonStateOnlyRead implements IAutomatonState {
 
         if(line.startsWith(Settings.getCodeBlockStart())) {
             automaton.setState(new AutomatonStateProcess(line.split(" ")[1]));
-            return "";
+            return Settings.getTexBlockStart() + "\n\\codetexNewline \\typoscale[" + Settings.getBlockFontSize() + "0/" + Settings.getBlockFontSize() + "0]\n";
         }
 
         return line + "\n";

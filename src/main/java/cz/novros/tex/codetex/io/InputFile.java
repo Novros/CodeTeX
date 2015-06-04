@@ -24,14 +24,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Class for reading io.
+ * Class for reading from file.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0
  * @since 2015-05-27
  */
 public class InputFile {
-    Logger logger = Logger.getLogger("InputFile");
+    Logger logger = Logger.getLogger(InputFile.class);
     final static Charset ENCODING = StandardCharsets.UTF_8;
 
     private String fileName = "";
@@ -40,14 +40,14 @@ public class InputFile {
     private boolean end = false;
 
     public InputFile(String fileName) throws IOException {
-        logger.debug("Openning file " + fileName);
+        logger.debug("Opening file to read with file name " + fileName);
         this.fileName = fileName;
         this.path = Paths.get(this.fileName);
         reader = Files.newBufferedReader(path, ENCODING);
     }
 
     /**
-     * Read one line from io.
+     * Read one line from file.
      *
      * @return String filled with one line.
      */
@@ -59,8 +59,7 @@ public class InputFile {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            logger.error("Could not read line. " + e);
-            e.printStackTrace();
+            logger.error("Could not read line from file! Exception: {}", e);
         }
 
         if(line == null) {
@@ -71,6 +70,11 @@ public class InputFile {
         return line;
     }
 
+    /**
+     * Read whole file.
+     *
+     * @return Returns string filled with all lines of file.
+     */
     public String readFile() {
         String file = "";
         String line = "";
@@ -84,10 +88,19 @@ public class InputFile {
                 file += line + "\n";
             }
         } catch (IOException e) {
-            logger.error("Could not read line. " + e);
-            e.printStackTrace();
+            logger.error("Could not read line from file! Exception: {} ", e);
         }
         return file;
+    }
+
+    /**
+     * Close file.
+     *
+     * @throws IOException It is thrown when was problem with closing file.
+     */
+    public void close() throws IOException {
+        reader.close();
+        end = true;
     }
 
     public boolean isEnd() {

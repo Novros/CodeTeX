@@ -19,9 +19,10 @@ import cz.novros.tex.codetex.io.IOutput;
 import cz.novros.tex.codetex.io.InputFile;
 import cz.novros.tex.codetex.processors.*;
 import cz.novros.tex.codetex.processors.highlighting.*;
-import cz.novros.tex.codetex.processors.indent.EscapingProcessor;
-import cz.novros.tex.codetex.processors.indent.IndentProcessor;
+import cz.novros.tex.codetex.processors.indenting.EscapingProcessor;
+import cz.novros.tex.codetex.processors.indenting.IndentingProcessor;
 import cz.novros.tex.codetex.settings.Settings;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ import java.util.List;
  * @since 2015-05-27
  */
 public class Automaton {
+    private static Logger logger = Logger.getLogger(Automaton.class);
+
     private InputFile input;
     private IOutput output;
 
@@ -47,24 +50,33 @@ public class Automaton {
         try {
             input = new InputFile(fileName);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Could not open file for reading! Exception: {}", e);
         }
 
         processors.add(new EscapingProcessor());
         processors.add(new HighlightingProcessor());
-        processors.add(new IndentProcessor());
+        processors.add(new IndentingProcessor());
     }
 
+    /**
+     * Run automaton.
+     */
     public void run() {
         String line;
 
-        output.writeLine(Settings.getBeginText());
         output.write(Settings.getCodetexMacros());
 
         while (!input.isEnd()) {
             line = input.readLine();
             line = state.handle(this,line);
             output.write(line);
+        }
+
+        try {
+            input.close();
+            output.close();
+        } catch (Exception e) {
+            logger.error("Could not close files! Exception: {}", e);
         }
     }
 

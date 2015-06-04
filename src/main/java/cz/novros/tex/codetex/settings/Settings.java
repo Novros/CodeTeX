@@ -14,9 +14,9 @@ package cz.novros.tex.codetex.settings;
  **/
 
 import cz.novros.tex.codetex.io.InputFile;
+import org.apache.log4j.Logger;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -31,6 +31,9 @@ import java.util.Properties;
  * @since 2015-05-28
  */
 public class Settings {
+
+    private static Logger logger = Logger.getLogger(Settings.class);
+
     public static String SETTINGS_DIR = getJarLocation() + "settings" + File.separator;
     public static String LANGUAGE_SETTINGS_DIR = SETTINGS_DIR + "language_settings" + File.separator;
 
@@ -41,43 +44,76 @@ public class Settings {
     private static String codetexMacros;
     private static String codeBlockStart;
     private static String codeBlockEnd;
-    private static String beginText;
-    private static int spaceSize;
+    private static String texBlockStart;
+    private static String texBlockEnd;
+    private static int blockFontSize;
     private static int tabularSpaceCount;
     private static Map<String,String> texMacros = new HashMap<>();
 
-    public static void loadSettings() throws IOException {
-        InputStream input = new FileInputStream(configFile);
+    /**
+     * Load settings from settings files in settings folder.
+     */
+    public static void loadSettings() {
+        logger.info("Loading application settings.");
+        InputStream input = null;
+        InputFile texMacrosInput = null;
+        InputFile codetexMacrosInput = null;
 
-        Properties properties = new Properties();
-        properties.load(input);
+        try {
+            logger.debug("Loading settings.properties file.");
+            input = new FileInputStream(configFile);
 
-        codeBlockStart = properties.getProperty("verbatim.start");
-        codeBlockEnd = properties.getProperty("verbatim.end");
-        beginText = properties.getProperty("begin_text");
-        spaceSize = Integer.parseInt(properties.getProperty("space.size"));
-        tabularSpaceCount = Integer.parseInt(properties.getProperty("space.tabular"));
+            Properties properties = new Properties();
+            properties.load(input);
 
-        InputFile texMacrosInput = new InputFile(texMacrosFile);
-        String line;
-        while (!texMacrosInput.isEnd()) {
-            line = texMacrosInput.readLine();
-            if(line != null && line.split("=").length > 1) {
-                texMacros.put(line.split("=")[0], line.split("=")[1]);
+            codeBlockStart = properties.getProperty("verbatim.start");
+            codeBlockEnd = properties.getProperty("verbatim.end");
+            texBlockStart = properties.getProperty("block.start");
+            texBlockEnd = properties.getProperty("block.end");
+            tabularSpaceCount = Integer.parseInt(properties.getProperty("space.tabular"));
+            blockFontSize = Integer.parseInt(properties.getProperty("font.size"));
+
+            logger.debug("Loading tex_macros.properties file.");
+            texMacrosInput = new InputFile(texMacrosFile);
+            String line;
+            while (!texMacrosInput.isEnd()) {
+                line = texMacrosInput.readLine();
+                if (line != null && line.split("=").length > 1) {
+                    texMacros.put(line.split("=")[0], line.split("=")[1]);
+                }
+            }
+
+            logger.debug("Loading codetex_macros file.");
+            codetexMacrosInput = new InputFile(codetexMacrosFile);
+            codetexMacros = codetexMacrosInput.readFile();
+
+        } catch (IOException e) {
+            logger.error("There was problem with loading application settings! Exception: {}", e);
+
+        } finally {
+            try {
+                input.close();
+                texMacrosInput.close();
+                codetexMacrosInput.close();
+            } catch (IOException e) {
+                logger.error("There was problem with closing files! Exception: {}", e);
             }
         }
-
-        texMacrosInput = new InputFile(codetexMacrosFile);
-        codetexMacros = texMacrosInput.readFile();
     }
 
+    /**
+     * Returns location of jar.
+     *
+     * @return String filled with jar location.
+     */
     private static String getJarLocation() {
-        URL url = Settings.class.getProtectionDomain().getCodeSource().getLocation(); //Gets the path
+        logger.debug("Getting jar file location.");
+        URL url = Settings.class.getProtectionDomain().getCodeSource().getLocation();
         String jarPath = null;
         try {
-            jarPath = URLDecoder.decode(url.getFile(), "UTF-8"); //Should fix it to be read correctly by the system
+            jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error("Could not get jar file location! Exception: {}", e);
         }
 
         String parentPath = new File(jarPath).getParentFile().getPath(); //Path of the jar
@@ -94,10 +130,6 @@ public class Settings {
         return codeBlockEnd;
     }
 
-    public static String getBeginText() {
-        return beginText;
-    }
-
     public static String getMacro(String macro) {
         return texMacros.get(macro);
     }
@@ -106,11 +138,19 @@ public class Settings {
         return tabularSpaceCount;
     }
 
-    public static int getSpaceSize() {
-        return spaceSize;
-    }
-
     public static String getCodetexMacros() {
         return codetexMacros;
+    }
+
+    public static int getBlockFontSize() {
+        return blockFontSize;
+    }
+
+    public static String getTexBlockStart() {
+        return texBlockStart;
+    }
+
+    public static String getTexBlockEnd() {
+        return texBlockEnd;
     }
 }

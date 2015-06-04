@@ -37,21 +37,18 @@ public class Main {
 
     private static Automaton automaton;
 
+    /**
+     * Main procedure of this program. It only parse arguments, create automaton and run it.
+     *
+     * @param args Arguments for this program. First is optional and it is -o for output file. If it is not declared it
+     *             will print output to console. And second is for input file.
+     */
     public static void main(String [] args) {
         logger.info("Application has started.");
-
-        String arguments = "";
-        for(String arg : args) {
-            arguments += arg + ",";
-        }
-        logger.debug("Arguments: " + arguments);
+        logger.debug("Started with arguments: " + printArguments(args));
 
         processCommandLineArguments(args);
-        try {
-            Settings.loadSettings();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Settings.loadSettings();
         createAutomaton();
         automaton.run();
 
@@ -66,6 +63,7 @@ public class Main {
     private static void processCommandLineArguments(String [] arguments) {
         // Bad arguments
         if(arguments.length < 1 || arguments.length == 2 || arguments.length > 3) {
+            logger.error("Bad argument usage!");
             printUsage();
             System.exit(1);
         }
@@ -90,7 +88,7 @@ public class Main {
             try {
                 automaton.setOutput(new OutputFile(outputFileName));
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("There was problem with creating outputfile! Exception: {}", e);
             }
         } else {
             automaton.setOutput(new OutputSystem());
@@ -103,5 +101,19 @@ public class Main {
     private static void printUsage() {
         System.out.println("Bad start of application CodeTeX.");
         System.out.println("codetex [-o outputFile] inputFile");
+    }
+
+    /**
+     * Returns arguments in string.
+     *
+     * @param args All arguments in array.
+     * @return Returns String filled with all arguments.
+     */
+    private static String printArguments(String[] args) {
+        String arguments = "";
+        for(String arg : args) {
+            arguments += arg + ",";
+        }
+        return arguments;
     }
 }

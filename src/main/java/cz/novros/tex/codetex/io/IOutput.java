@@ -35,4 +35,9 @@ public interface IOutput {
      * @param text Text, which will be printed.
      */
     public void writeLine(String text);
+
+    /**
+     * Close output.
+     */
+    public void close() throws Exception;
 }

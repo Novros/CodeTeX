@@ -25,11 +25,11 @@ import cz.novros.tex.codetex.settings.LanguageSettings;
 public interface IProcessor {
 
     /**
-     * Process passed line of String, filled with code.
+     * Process passed line of String filled with code.
      *
      * @param line One line, which will be processed.
      * @param language Language setting.
-     * @return Return processed line.
+     * @return Returns processed line.
      */
     public String processLine(String line, LanguageSettings language);
 }

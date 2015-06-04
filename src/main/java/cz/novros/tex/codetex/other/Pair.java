@@ -14,7 +14,7 @@ package cz.novros.tex.codetex.other;
  **/
 
 /**
- * Class for key and value.
+ * Class for key and value pair.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0

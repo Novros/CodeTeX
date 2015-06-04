@@ -32,11 +32,7 @@ public class AutomatonStateProcess implements IAutomatonState {
     private LanguageSettings language;
 
     public AutomatonStateProcess(String language) {
-        try {
-            this.language = new LanguageSettings(language);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.language = new LanguageSettings(language);
     }
 
     /**
@@ -51,7 +47,8 @@ public class AutomatonStateProcess implements IAutomatonState {
 
         if(line.startsWith(Settings.getCodeBlockEnd())) {
             automaton.setState(new AutomatonStateOnlyRead());
-            return "";
+            int defaultFontSize = (100 - Settings.getBlockFontSize()) + 100;
+            return "\\codetexNewline \\typoscale[" + defaultFontSize + "0/" + defaultFontSize + "0]\n" + Settings.getTexBlockEnd() + "\n";
         }
 
         for (IProcessor processor : automaton.getProessors()) {

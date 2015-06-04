@@ -1,12 +1,2 @@
-* Vytvořit install script a spuštěcí script.
-
-* Projít soubory a upravit.
-* Okomentovat soubory.
-* Uklidit složku.
-* Uložit správně testovací soubor.
-* Rozhodit soubory tak kam patří.
-* Napsat defaultní makra
-* Napsat do README, že to používá OPmac, pokud jej taky používá, ať to dá jako prnví věc v dokumentu v oblasti deklarace pro COdeTEx
-* Domyslet jak verbatim, jestli to tam vůbec dávat jako možnost pro použítí bez tohoto programu, protože když to někdo bude chtít použít, tak tam stejně některé věci musí doplnit.
-* Přidat na začátek oblasti \codetexNewline
-                            \typosize[8/0]
+* Vytvořit install script a spouštěcí script.
+* Dopsat README

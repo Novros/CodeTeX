@@ -1,14 +1,41 @@
 package cz.novros.tex.codetex.processors.highlighting.state;
 
+/**
+ * LICENSE This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * http://www.gnu.org/copyleft/gpl.html
+ **/
+
 import cz.novros.tex.codetex.processors.highlighting.HighlightingProcessor;
 import cz.novros.tex.codetex.settings.LanguageSettings;
 import cz.novros.tex.codetex.settings.Settings;
 
+import java.util.List;
+
 /**
- * Created by rostislav on 1.6.15.
+ * State of highlighting line of code..
+ *
+ * @author Rostislav Novak <rostislav.novak92@gmail.com>
+ * @version 1.0
+ * @since 2015-06-01
  */
 public class HighlightingProcessorStateNormal implements IHighlightingProcessorState {
 
+    /**
+     * It will handle one line of code.
+     *
+     * @param processor Processor of which i am state.
+     * @param line Line of text, which will be handled.
+     * @param language Language settings.
+     * @return Returns processed line of text.
+     */
     @Override
     public String handle(HighlightingProcessor processor, String line, LanguageSettings language) {
 
@@ -37,12 +64,19 @@ public class HighlightingProcessorStateNormal implements IHighlightingProcessorS
 
     }
 
+    /**
+     * Highlight line of text by language settings.
+     *
+     * @param line Text which will be highlighted.
+     * @param language Language settings.
+     * @return Returns highlighted line of text.
+     */
     private String highlighting(String line, LanguageSettings language) {
         int position = 0;
 
         line = line.trim();
         for(int i = 0; i < line.length(); i++) {
-            if(isDelimetr(line.charAt(i), language)) {
+            if(isDelimiter(line.charAt(i), language)) {
                 line = line.substring(0, position)
                         + processWord(line.substring(position,i), language)
                         + line.substring(i,line.length());
@@ -74,27 +108,63 @@ public class HighlightingProcessorStateNormal implements IHighlightingProcessorS
         return line;
     }
 
-    private boolean isDelimetr(char text, LanguageSettings language) {
-        return isInCollection(String.valueOf(text),language.getDelimetrs());
+    /**
+     * Returns if char is delimiter of language settings or not.
+     *
+     * @param text Char which will be tested.
+     * @param language Language settings.
+     * @return Returns True if char is delimiter, otherwise false.
+     */
+    private boolean isDelimiter(char text, LanguageSettings language) {
+        return isInCollection(String.valueOf(text),language.getDelimiters());
     }
 
+    /**
+     * Returns if char is string declaration in language.
+     *
+     * @param text Char which will be tested.
+     * @param language Language settings.
+     * @return Returns True if char is string declaration, otherwise false.
+     */
     private boolean isString(char text, LanguageSettings language) {
         return isInCollection(String.valueOf(text),language.getStringDeclarations());
     }
 
-    private boolean isInCollection(String text, Iterable<String> collection ) {
-        for( String compare : collection) {
+    /**
+     * Tests if text is in collection.
+     *
+     * @param text Text which will be checked.
+     * @param collection
+     * @return Returns true if
+     */
+    private boolean isInCollection(String text, List<String> collection) {
+        return collection.contains(text);
+        /*for( String compare : collection) {
             if (String.valueOf(text).equals(compare)) {
                 return true;
             }
         }
-        return false;
+        return false;*/
     }
 
+    /**
+     * Process word for highlighting.
+     *
+     * @param word Word, which will be processed.
+     * @param language Language settings.
+     * @return Returns processed word.
+     */
     private String processWord(String word, LanguageSettings language) {
         return processKeyword(word, language);
     }
 
+    /**
+     * Highlight keyword if word is.
+     *
+     * @param word Word which can be highlighted.
+     * @param language Language settings.
+     * @return Returns processed word.
+     */
     private String processKeyword(String word, LanguageSettings language) {
         for (String keyword : language.getKeywords()) {
             if (word.equals(keyword)) {
@@ -105,6 +175,13 @@ public class HighlightingProcessorStateNormal implements IHighlightingProcessorS
         return word;
     }
 
+    /**
+     * Highlight line of text as string.
+     *
+     * @param line Line of text, which will be highlighted.
+     * @param language Language settings.
+     * @return  Returns processed line.
+     */
     private String processString(String line, LanguageSettings language) {
         return HighlightingProcessor.applyMacro(Settings.getMacro(language.getMapping("string")), line);
     }

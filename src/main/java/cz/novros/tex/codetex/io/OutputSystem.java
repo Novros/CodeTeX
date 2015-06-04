@@ -41,4 +41,12 @@ public class OutputSystem implements IOutput {
     public void writeLine(String text) {
         System.out.println(text);
     }
+
+    /**
+     * Close output.
+     */
+    @Override
+    public void close() {
+
+    }
 }

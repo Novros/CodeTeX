@@ -17,7 +17,7 @@ import cz.novros.tex.codetex.processors.IProcessor;
 import cz.novros.tex.codetex.settings.LanguageSettings;
 
 /**
- * Processor, which remove evyrthing from line.
+ * Processor, which remove everything in line.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0
@@ -25,6 +25,13 @@ import cz.novros.tex.codetex.settings.LanguageSettings;
  */
 public class RemoveProcessor implements IProcessor {
 
+    /**
+     * Remove evrything from line.
+     *
+     * @param line One line, which will be processed.
+     * @param language Language setting.
+     * @return Returns removed line. String "".
+     */
     @Override
     public String processLine(String line, LanguageSettings language) {
         return "";

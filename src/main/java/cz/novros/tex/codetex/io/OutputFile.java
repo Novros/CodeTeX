@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Output class for writing to io.
+ * Output class for writing to file.
  *
  * @author Rostislav Novak <rostislav.novak92@gmail.com>
  * @version 1.0
@@ -32,7 +32,7 @@ import java.nio.file.Paths;
  */
 public class OutputFile implements IOutput {
 
-    private Logger logger = Logger.getLogger("InputFile");
+    private Logger logger = Logger.getLogger(OutputFile.class);
     private final static Charset ENCODING = StandardCharsets.UTF_8;
 
     private String fileName = "";
@@ -40,7 +40,7 @@ public class OutputFile implements IOutput {
     private BufferedWriter writer = null;
 
     public OutputFile(String fileName) throws IOException {
-        logger.debug("Openning file in constructor...");
+        logger.debug("Opening file for output with file name " + fileName);
         this.fileName = fileName;
         this.path = Paths.get(this.fileName);
         writer = Files.newBufferedWriter(path, ENCODING);
@@ -52,15 +52,12 @@ public class OutputFile implements IOutput {
      * @param text Text, which will be printed.
      */
     public void writeLine(String text) {
-        logger.debug("Writing line: " + text);
-
         try {
             writer.write(text);
             writer.newLine();
             writer.flush();
         } catch (IOException e) {
-            logger.error("Could not write line. " + e);
-            e.printStackTrace();
+            logger.error("Could not write line to file! Exception: {} ", e);
         }
     }
 
@@ -70,14 +67,20 @@ public class OutputFile implements IOutput {
      * @param text Text, which will be printed.
      */
     public void write(String text) {
-        logger.debug("Writing: " + text);
-
         try {
             writer.write(text);
             writer.flush();
         } catch (IOException e) {
-            logger.error("Could not write line. " + e);
-            e.printStackTrace();
+            logger.error("Could not write text to file! Exception: {} ", e);
         }
+    }
+
+    /**
+     * Close file.
+     *
+     * @throws IOException If there was problem with closing file.
+     */
+    public void close() throws IOException {
+        writer.close();
     }
 }

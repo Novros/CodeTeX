@@ -14,6 +14,7 @@ package cz.novros.tex.codetex.settings;
  **/
 
 import cz.novros.tex.codetex.io.InputFile;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,6 +29,8 @@ import java.util.*;
  * @since 2015-05-28
  */
 public class LanguageSettings {
+
+    private static Logger logger = Logger.getLogger(LanguageSettings.class);
 
     private String[] keywords;
 
@@ -44,42 +47,64 @@ public class LanguageSettings {
     private String classDeclarationRegex;
     private String callingRegex;
 
-    private List<String> delimetrs = new ArrayList<>();
+    private List<String> delimiters = new ArrayList<>();
 
     private Map<String,String> macroMappings = new HashMap<>();
 
-    public LanguageSettings(String language) throws IOException {
-        InputStream input = new FileInputStream(Settings.LANGUAGE_SETTINGS_DIR + language + "_match.properties");
+    /**
+     * Creates language settings from passed language.
+     *
+     * @param language Language which will be loaded. It must be prefix of settings files.
+     */
+    public LanguageSettings(String language) {
+        logger.info("Loading language settings of language: " + language + "." );
+        InputStream input = null;
+        InputFile texMacrosInput = null;
 
-        Properties properties = new Properties();
-        properties.load(input);
+        try {
+            logger.debug("Loading language match settings.");
+            input = new FileInputStream(Settings.LANGUAGE_SETTINGS_DIR + language + "_match.properties");
 
-        keywords = properties.getProperty("keywords").split(",");
-        commentLine = properties.getProperty("comment.line");
-        commentBegin = properties.getProperty("comment.begin");
-        commentEnd = properties.getProperty("comment.end");
-        classMethodRegex = properties.getProperty("class.method");
-        classDeclarationRegex = properties.getProperty("class.declaration");
-        callingRegex = properties.getProperty("class.calling");
-        blockStart = properties.getProperty("block.start");
-        blockEnd = properties.getProperty("block.end");
+            Properties properties = new Properties();
+            properties.load(input);
 
-        String temp = properties.getProperty("delimetrs");
-        for(int i = 0; i < temp.length(); i++) {
-            delimetrs.add(String.valueOf(temp.charAt(i)));
-        }
-        delimetrs.add(" ");
+            keywords = properties.getProperty("keywords").split(",");
+            commentLine = properties.getProperty("comment.line");
+            commentBegin = properties.getProperty("comment.begin");
+            commentEnd = properties.getProperty("comment.end");
+            classMethodRegex = properties.getProperty("class.method");
+            classDeclarationRegex = properties.getProperty("class.declaration");
+            callingRegex = properties.getProperty("class.calling");
+            blockStart = properties.getProperty("block.start");
+            blockEnd = properties.getProperty("block.end");
 
-        for(String s : properties.getProperty("string").split(",")) {
-            stringDeclarations.add(s);
-        }
+            String temp = properties.getProperty("delimetrs");
+            for (int i = 0; i < temp.length(); i++) {
+                delimiters.add(String.valueOf(temp.charAt(i)));
+            }
+            delimiters.add(" ");
 
-        InputFile texMacrosInput = new InputFile(Settings.LANGUAGE_SETTINGS_DIR + language + "_highlighting.properties");
-        String line;
-        while (!texMacrosInput.isEnd()) {
-            line = texMacrosInput.readLine();
-            if(line != null && line.split("=").length > 1) {
-                macroMappings.put(line.split("=")[0], line.split("=")[1]);
+            for (String s : properties.getProperty("string").split(",")) {
+                stringDeclarations.add(s);
+            }
+
+            logger.debug("Loading language highlighting settings.");
+            texMacrosInput = new InputFile(Settings.LANGUAGE_SETTINGS_DIR + language + "_highlighting.properties");
+            String line;
+            while (!texMacrosInput.isEnd()) {
+                line = texMacrosInput.readLine();
+                if (line != null && line.split("=").length > 1) {
+                    macroMappings.put(line.split("=")[0], line.split("=")[1]);
+                }
+            }
+        } catch (IOException e) {
+            logger.error("There was problem with loading language settings files! Exception: {}", e);
+        } finally {
+            try {
+                input.close();
+                texMacrosInput.close();
+            } catch (IOException e) {
+                logger.error("Could not close language settings file! Exception: {}", e);
             }
         }
     }
@@ -116,8 +141,8 @@ public class LanguageSettings {
         return macroMappings.get(key);
     }
 
-    public List<String> getDelimetrs() {
-        return delimetrs;
+    public List<String> getDelimiters() {
+        return delimiters;
     }
 
     public List<String> getStringDeclarations() {

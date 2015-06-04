@@ -1,4 +1,4 @@
-package cz.novros.tex.codetex.processors.indent;
+package cz.novros.tex.codetex.processors.indenting;
 
 /**
  * LICENSE This program is free software; you can redistribute it and/or
@@ -18,9 +18,7 @@ import cz.novros.tex.codetex.processors.IProcessor;
 import cz.novros.tex.codetex.settings.LanguageSettings;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Processor for escaping TeX reserved chars.
@@ -49,6 +47,13 @@ public class EscapingProcessor implements IProcessor {
     }
 
 
+    /**
+     * Escaped all TeX reserved chars for printing nice printing in code.
+     *
+     * @param line Line, which will be escaped.
+     * @param language Language setting.
+     * @return Returns escaped line.
+     */
     @Override
     public String processLine(String line, LanguageSettings language) {
         for (Pair character : specialCharactersMapping) {
@@ -57,6 +62,13 @@ public class EscapingProcessor implements IProcessor {
         return line;
     }
 
+    /**
+     * Escape line of text with passed Pair(match, escaped).
+     *
+     * @param line Line of text which will be escaped.
+     * @param character Pair(match, escaped).
+     * @return Returns escaped line of text.
+     */
     private String escapeSpecialCharacters(String line, Pair character) {
         if(line.contains((String)character.getA())) {
             int position = line.indexOf((String)character.getA());
