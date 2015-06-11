@@ -1,4 +1,6 @@
 %%%%%%%% Zde začíná "oblast definic" pro tento dokument %%%%%%%%%%%
+\input opmac
+\def\codetexLangauge #1 { }
 
 \newcount\itemnum                % deklarace počítadla odrážek
 \def\White{\pdfliteral{1 g}}     % bíla barva pomocí PDF low level příkazu
@@ -33,7 +35,7 @@ Jednotlivé odstavce oddělujeme od sebe prázdným řádkem. Prázdnými řádk
 vůbec nešetříme, protože zvyšují přehlednost zdrojového textu.
 Vyzkoušíme si nyní několik věcí.
 
-\begtt java
+\codetexLangauge{java} \begtt
 # $ % & \ ^ _ { }  < > ~
 public class InputFile {
     Logger logger = Logger.getLogger("InputFile");
@@ -105,7 +107,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida porttit
 
 Curabitur quis pulvinar urna. Aenean nec tempus felis. Nunc ullamcorper nunc eget ipsum sodales, vitae mattis urna vulputate. Integer pretium tincidunt mauris in condimentum. Duis vitae elementum diam. Aliquam erat volutpat. Cras volutpat commodo felis, et ultricies purus rutrum a. Nam rutrum consectetur nulla vel tincidunt. Phasellus sit amet elit ac justo pulvinar congue. Nam lacinia, massa quis aliquam volutpat, erat eros placerat est, vel maximus ipsum tortor at sem. Vestibulum pretium, metus sit amet scelerisque imperdiet, libero odio viverra velit, sit amet consectetur lectus ante ac dolor. Maecenas eu euismod ligula. Praesent a tincidunt magna.
 
-\begtt php
+\codetexLangauge{php}\begtt
 class DefaultController extends Controller
 {
 

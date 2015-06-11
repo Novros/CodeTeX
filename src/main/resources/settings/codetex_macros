@@ -1,6 +1,5 @@
 \input opmac
-\def\codetexSpace #1 {
-	\dimen0 = #1pt
-	\dimen0 = 4\dimen0
-	\hskip \dimen0 \relax}
+\def\codetexSpaceWidth {4pt}
+\def\codetexSpace #1 {\hskip #1\codetexSpaceWidth \relax}
 \def\codetexNewline {\par}
+\def\codetexLangauge #1 { }

@@ -26,8 +26,8 @@ fi
 # Copying procedure
 echo "+ Copying compiled CodeTeX..."
 cp target/CodeTeX-jar-with-dependencies.jar $TARGET/CodeTeX.jar
-cp -r target/settings $TARGET/settings 
-printf "#!/bin/bash\njava -jar CodeTeX.jar \$*\n" > $TARGET/CodeTeX
+cp -R target/settings $TARGET/settings 
+printf "#!/bin/bash\nBASEDIR=\$(dirname \$0)\njava -jar \$BASEDIR/CodeTeX.jar \$*\n" > $TARGET/CodeTeX
 
 # Cleaning target
 echo "+ Cleaning compiled things..."

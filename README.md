@@ -2,8 +2,12 @@
 This program is for code highlighting and intending in plain TeX. It is console preprocessor for plain TeX. With this
 program you can have simple syntax highlighting in plain TeX. CodeTeX can highlight only comments, keywords,
 strings and indent code. You can set some variables for application and language, which you want to highlight. CodeTeX
-uses OPmac library for default TeX macros (only colors). CodeTeX is written in Java 1.6, so you must have installed
-at least Java 1.6.
+uses OPmac library for default TeX macros (only colors). Make sure you have the newest OPmac library in your TeX
+distribution. CodeTeX is written in Java 1.6, so you must have installed at least Java 1.6.
+
+If you have not prerequisites for installing CodeTex, use builded jar file in CodeTeX folder.
+
+One mistake, which i must repair. CodeTeX create log in folder from which you are executing the application.
 
 Application version: 1.0
 
@@ -28,7 +32,7 @@ look similar to this:
     ...
     Some text
     ...
-    \beginCodeBlock java
+    \codetexLangauge{java} \beginCodeBlock
         public class HelloWorld { 
            public static void main(String[] args) { 
               System.out.println("Hello, World");
@@ -39,8 +43,14 @@ look similar to this:
     Another text
     ...
 
-Then tag \beginCodeBlock and tag \emdCodeBlock must be defined in settings.properties file. Another example is in
+Then the tag \beginCodeBlock and tag \emdCodeBlock must be defined in settings.properties file. Another example is in
 *test/test.tex* file.
+
+**HINT:**
+If you want to have option to compile input TeX file without this program add to begin program:
+
+  \def\codetexLangauge #1 { }
+  % And here must be definition of \beginCodeBlock and \endCodeBlock, which must be declare as verbatim block.
 
 ## Settings
 CodeTeX has three settings and two for each language. If you want to see them, see **src/main/resources/settings**.
@@ -70,7 +80,7 @@ You can build application by command `mvn package assembly:single` or use script
 will find application in target directory. In second option you can specify target directory or it will create own
 directory CodeTeX.
 
-### Perquisites
-If you want to build this program, you must have installed Maven and Java 1.7.
+### Prerequisites
+If you want to build this program, you must have installed Maven and Java 1.6.
 
 Copyright (c) 2015, Rostislav Novak. All rights reserved.

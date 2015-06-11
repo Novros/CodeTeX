@@ -47,7 +47,7 @@ public class AutomatonStateProcess implements IAutomatonState {
 
         if(line.startsWith(Settings.getCodeBlockEnd())) {
             automaton.setState(new AutomatonStateOnlyRead());
-            return "\\codetexNewline \\typoscale[" + 10000/Settings.getBlockFontSize() + "0/" + 10000/Settings.getBlockParSize() + "0]\n" + Settings.getTexBlockEnd() + "\n";
+            return "\\endgroup\n" + Settings.getTexBlockEnd() + "\n";
         }
 
         for (IProcessor processor : automaton.getProessors()) {

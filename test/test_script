@@ -17,7 +17,7 @@ fi
 # Testing procedure
 echo "+ Starting application with sample tex file."
 cd target
-java -jar CodeTeX-jar-with-dependencies.jar -o ../test/temp.tex ../test/test.tex
+java -jar CodeTeX-jar-with-dependencies.jar -o ../test/output.tex ../test/test.tex
 
 if [ "$?" != "0" ]; then
 	echo "ERROR: There was problem with application."
@@ -27,7 +27,7 @@ fi
 # TeX procedure
 cd ../test
 echo "+ Compiling created file with pdfcsplain."
-pdfcsplain temp.tex
+pdfcsplain output.tex
 
 echo "------------------------------------------------------------"
 echo "Testing CodeTex complete!"

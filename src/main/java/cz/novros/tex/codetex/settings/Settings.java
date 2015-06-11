@@ -46,6 +46,7 @@ public class Settings {
     private static String codeBlockEnd;
     private static String texBlockStart;
     private static String texBlockEnd;
+    private static String codeBlockInnerStart;
     private static int blockFontSize;
     private static int blockParSize;
     private static int tabularSpaceCount;
@@ -71,6 +72,7 @@ public class Settings {
             codeBlockEnd = properties.getProperty("verbatim.end");
             texBlockStart = properties.getProperty("block.start");
             texBlockEnd = properties.getProperty("block.end");
+            codeBlockInnerStart = properties.getProperty("block.inner.start");
             tabularSpaceCount = Integer.parseInt(properties.getProperty("space.tabular"));
             blockFontSize = Integer.parseInt(properties.getProperty("font.size"));
             blockParSize = Integer.parseInt(properties.getProperty("font.par.size"));
@@ -108,7 +110,7 @@ public class Settings {
      *
      * @return String filled with jar location.
      */
-    private static String getJarLocation() {
+    public static String getJarLocation() {
         logger.debug("Getting jar file location.");
         URL url = Settings.class.getProtectionDomain().getCodeSource().getLocation();
         String jarPath = null;
@@ -158,5 +160,9 @@ public class Settings {
 
     public static int getBlockParSize() {
         return blockParSize;
+    }
+
+    public static String getCodeBlockInnerStart() {
+        return codeBlockInnerStart;
     }
 }

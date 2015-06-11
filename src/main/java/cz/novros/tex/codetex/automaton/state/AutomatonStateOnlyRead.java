@@ -25,6 +25,8 @@ import cz.novros.tex.codetex.settings.Settings;
  */
 public class AutomatonStateOnlyRead implements IAutomatonState {
 
+    private String languageRegex = "\\codetexLangauge( )*\\{.*\\}";
+
     /**
      * Handle line from automaton. Only check if line contains start block code.
      *
@@ -35,11 +37,19 @@ public class AutomatonStateOnlyRead implements IAutomatonState {
     @Override
     public String handle(Automaton automaton, String line) {
 
-        if(line.startsWith(Settings.getCodeBlockStart())) {
-            automaton.setState(new AutomatonStateProcess(line.split(" ")[1]));
-            return Settings.getTexBlockStart() + "\n\\codetexNewline \\typoscale[" + Settings.getBlockFontSize() + "0/" + Settings.getBlockParSize() + "0]\n";
+        if(line.endsWith(Settings.getCodeBlockStart())) {
+            automaton.setState(new AutomatonStateProcess(getLanguage(line)));
+            return Settings.getTexBlockStart() + "\n\\begingroup\\typoscale["
+                + Settings.getBlockFontSize() + "0/"
+                + Settings.getBlockParSize() + "0]\n"
+                + Settings.getCodeBlockInnerStart() + "\n";
         }
 
         return line + "\n";
+    }
+
+    private String getLanguage(String line) {
+        String splitString = (line.split(languageRegex))[0];
+        return splitString.substring(splitString.indexOf("{")+1,splitString.indexOf("}"));
     }
 }
